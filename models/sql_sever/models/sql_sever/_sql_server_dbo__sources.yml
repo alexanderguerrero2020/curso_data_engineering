@@ -1,8 +1,7 @@
 version: 2
 
 sources:
-
-  - name: sql_server_dbo # name of the source 
+  - name: sql_server_dbo # name of the source
     schema: sql_server_dbo # this is the schema our raw data lives in
     database: ALUMNO9_DEV_BRONZE_DB # this is the name of our database
 
@@ -12,11 +11,10 @@ sources:
       identifier: false
 
     freshness:
-      warn_after: {count: 150, period: day}
-      error_after: {count: 300, period: day}
+      warn_after: { count: 150, period: day }
+      error_after: { count: 300, period: day }
 
     tables:
-
       - name: ADDRESSES
         loaded_at_field: _fivetran_synced
         columns:
@@ -88,7 +86,7 @@ sources:
           - name: STATUS
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
-                    
+
       - name: USERS
         loaded_at_field: _fivetran_synced
         columns:
@@ -103,7 +101,3 @@ sources:
           - name: EMAIL
           - name: _FIVETRAN_DELETED
           - name: _FIVETRAN_SYNCED
-
-
-
-

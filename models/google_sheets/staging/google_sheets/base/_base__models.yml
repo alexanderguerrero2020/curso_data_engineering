@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: budget
+    columns:
+      - name: product_id
+        data_type: varchar
+      - name: quantity
+        data_type: int
+      - name: month
+        data_type: date
+      - name: date_load
+        data_type: TIMESTAMP_TZ
