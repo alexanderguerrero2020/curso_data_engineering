@@ -10,6 +10,7 @@ with
 src_order_items as (
 
     select * from {{ source('sql_server_dbo', 'ORDER_ITEMS') }}
+    WHERE _fivetran_deleted IS NULL
 
 ),
 
@@ -19,8 +20,7 @@ renamed as (
         order_id,
         product_id,
         quantity,
-        _fivetran_deleted AS date_delete,
-        _fivetran_synced AS date_load
+        CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_fivetran_synced)) as utc_date_load
 
     from src_order_items
 
