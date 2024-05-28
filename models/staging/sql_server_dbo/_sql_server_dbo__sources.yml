@@ -17,87 +17,333 @@ sources:
     tables:
       - name: ADDRESSES
         loaded_at_field: _fivetran_synced
+        description: >
+          Tabla en la que se muestra la dirección
         columns:
           - name: ADDRESS_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
           - name: ZIPCODE
+            tests:
+              - positive_values
           - name: COUNTRY
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: ADDRESS
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: STATE
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_DELETED
+            tests:
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
+            # Con este test puedes combrobar la frescura
+            # tests:
+            #   - dbt_utils.recency:
+            #       datepart: day
+            #       field: created_at
+            #       interval: 1
+
 
       - name: EVENTS
         loaded_at_field: _fivetran_synced
         columns:
           - name: EVENT_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
           - name: PAGE_URL
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: EVENT_TYPE
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - accepted_values:
+                  values: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
           - name: USER_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','users')
+                  field: user_id
           - name: PRODUCT_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','products')
+                  field: product_id
           - name: SESSION_ID
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: CREATED_AT
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
           - name: ORDER_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','orders')
+                  field: order_id
           - name: _FIVETRAN_DELETED
+            tests:
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
 
       - name: ORDERS
         loaded_at_field: _fivetran_synced
         columns:
           - name: ORDER_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
           - name: SHIPPING_SERVICE
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - accepted_values_empty:
+                  values: ['ups', 'usps', 'fedex', 'dhl']
           - name: SHIPPING_COST
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: ADDRESS_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','addresses')
+                  field: address_id
           - name: CREATED_AT
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
           - name: PROMO_ID
-          - name: ESTIMATED_DELIVERY_AT
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','promos')
+                  field: promo_id
+          - name: ESTIMATED_DELIVERY_AT 
+            tests:
+              - dbt_utils.not_empty_string
+              - valid_datetime_format_or_null
           - name: ORDER_COST
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
           - name: USER_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','users')
+                  field: user_id
           - name: ORDER_TOTAL
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
           - name: DELIVERED_AT
+            tests:
+              - dbt_utils.not_empty_string
+              - valid_datetime_format_or_null
           - name: TRACKING_ID
+            tests:
+              - unique
+              - not_null
           - name: STATUS
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - accepted_values:
+                  values: ['delivered', 'shipped', 'preparing']
           - name: _FIVETRAN_DELETED
+            tests:
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
 
       - name: ORDER_ITEMS
         loaded_at_field: _fivetran_synced
         columns:
           - name: ORDER_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
           - name: PRODUCT_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','products')
+                  field: product_id
           - name: QUANTITY
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
           - name: _FIVETRAN_DELETED
+            tests:
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
 
       - name: PRODUCTS
         loaded_at_field: _fivetran_synced
         columns:
           - name: PRODUCT_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
           - name: PRICE
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
           - name: NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: INVENTORY
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_DELETED
+            tests:
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
 
       - name: PROMOS
         loaded_at_field: _fivetran_synced
         columns:
           - name: PROMO_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+          - name: PROMO_NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: DISCOUNT
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
           - name: STATUS
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - accepted_values:
+                  values: ['inactive', 'active']
           - name: _FIVETRAN_DELETED
+            tests:
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
 
       - name: USERS
         loaded_at_field: _fivetran_synced
         columns:
           - name: USER_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
           - name: UPDATED_AT
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
           - name: ADDRESS_ID
+            tests:
+              - unique
+              - not_null
+              - dbt_utils.not_empty_string
+              - relationships:
+                  to: source('sql_server_dbo','addresses')
+                  field: adress_id
           - name: LAST_NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: CREATED_AT
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format
           - name: PHONE_NUMBER
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_phone_number
           - name: TOTAL_ORDERS
+            tests:
+              - dbt_utils.not_empty_string
           - name: FIRST_NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
           - name: EMAIL
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_email
           - name: _FIVETRAN_DELETED
+            tests:
+              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - valid_datetime_format

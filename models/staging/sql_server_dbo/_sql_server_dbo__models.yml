@@ -199,6 +199,10 @@ models:
         data_type: varchar
         description: ""
 
+      - name: promo_name
+        data_type: varchar
+        description: ""
+        
       - name: discount
         data_type: number
         description: ""
