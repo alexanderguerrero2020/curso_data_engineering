@@ -265,3 +265,27 @@ models:
       - name: date_load
         data_type: timestamp_tz
         description: ""
+
+  - name: stg_sql_server_dbo__status_promos
+    description: ""
+    columns:
+      - name: status_promo_id
+        data_type: boolean
+        description: ""
+
+      - name: status_promo_name
+        data_type: varchar
+        description: ""
+
+  - name: stg_sql_server_dbo__status_orders
+    description: ""
+    columns:
+      - name: status_order_id
+        data_type: varchar
+        description: ""
+
+      - name: status_order_name
+        data_type: varchar
+        description: ""
+
+  

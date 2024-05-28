@@ -58,6 +58,8 @@ sources:
 
       - name: EVENTS
         loaded_at_field: _fivetran_synced
+        description: >
+          Tabla de eventos que realiza un usuario
         columns:
           - name: EVENT_ID
             tests:
@@ -76,7 +78,6 @@ sources:
                   values: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
           - name: USER_ID
             tests:
-              - unique
               - not_null
               - dbt_utils.not_empty_string
               - relationships:
@@ -84,7 +85,6 @@ sources:
                   field: user_id
           - name: PRODUCT_ID
             tests:
-              - unique
               - not_null
               - dbt_utils.not_empty_string
               - relationships:
@@ -101,7 +101,6 @@ sources:
               - valid_datetime_format
           - name: ORDER_ID
             tests:
-              - unique
               - not_null
               - dbt_utils.not_empty_string
               - relationships:
@@ -118,6 +117,8 @@ sources:
 
       - name: ORDERS
         loaded_at_field: _fivetran_synced
+        description: >
+          Tabla de las ordenes que hacen los usuarios
         columns:
           - name: ORDER_ID
             tests:
@@ -136,7 +137,6 @@ sources:
               - dbt_utils.not_empty_string
           - name: ADDRESS_ID
             tests:
-              - unique
               - not_null
               - dbt_utils.not_empty_string
               - relationships:
@@ -149,7 +149,6 @@ sources:
               - valid_datetime_format
           - name: PROMO_ID
             tests:
-              - unique
               - not_null
               - dbt_utils.not_empty_string
               - relationships:
@@ -166,7 +165,6 @@ sources:
               - positive_values
           - name: USER_ID
             tests:
-              - unique
               - not_null
               - dbt_utils.not_empty_string
               - relationships:
@@ -202,6 +200,8 @@ sources:
 
       - name: ORDER_ITEMS
         loaded_at_field: _fivetran_synced
+        description: >
+          Tabla de los productos dentro de las ordenes
         columns:
           - name: ORDER_ID
             tests:
@@ -232,6 +232,8 @@ sources:
 
       - name: PRODUCTS
         loaded_at_field: _fivetran_synced
+        description: >
+          Tabla con los productos
         columns:
           - name: PRODUCT_ID
             tests:
@@ -262,6 +264,8 @@ sources:
 
       - name: PROMOS
         loaded_at_field: _fivetran_synced
+        description: >
+          Tabla de promociones
         columns:
           - name: PROMO_ID
             tests:
@@ -294,6 +298,8 @@ sources:
 
       - name: USERS
         loaded_at_field: _fivetran_synced
+        description: >
+          Tabla con los usuarios registrados
         columns:
           - name: USER_ID
             tests:
@@ -307,7 +313,6 @@ sources:
               - valid_datetime_format
           - name: ADDRESS_ID
             tests:
-              - unique
               - not_null
               - dbt_utils.not_empty_string
               - relationships:
@@ -347,3 +352,33 @@ sources:
               - not_null
               - dbt_utils.not_empty_string
               - valid_datetime_format
+
+      - name: STATUS_PROMOS
+        loaded_at_field: _fivetran_synced
+        description: >
+          Tabla con los productos
+        columns:
+          - name: STATUS_PROMO_ID
+            tests:
+              - unique
+              - not_null
+          - name: STATUS_PROMO_NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
+
+      - name: STATUS_ORDERS
+        loaded_at_field: _fivetran_synced
+        description: >
+          Tabla con los productos
+        columns:
+          - name: STATUS_ORDER_ID
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+          - name: STATUS_ORDER_NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values

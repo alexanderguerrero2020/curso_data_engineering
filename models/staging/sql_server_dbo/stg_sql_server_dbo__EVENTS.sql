@@ -7,6 +7,7 @@
 WITH src_events AS (
     SELECT * 
     FROM {{ source('sql_server_dbo', 'EVENTS') }}
+    WHERE _fivetran_deleted IS NULL
     ),
 
 renamed_casted AS (
@@ -19,8 +20,7 @@ renamed_casted AS (
         , SESSION_ID
         , CREATED_AT
         , ORDER_ID
-        , _FIVETRAN_DELETED AS date_delete
-        , _FIVETRAN_SYNCED AS date_load
+        , CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_fivetran_synced)) as utc_date_load
     FROM src_events
     )
 

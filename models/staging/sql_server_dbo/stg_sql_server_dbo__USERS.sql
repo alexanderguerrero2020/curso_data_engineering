@@ -9,6 +9,7 @@ with
 src_users as (
 
     select * from {{ source('sql_server_dbo', 'USERS') }}
+    WHERE _fivetran_deleted IS NULL
 
 ),
 
@@ -24,8 +25,7 @@ renamed as (
         total_orders,
         first_name,
         email,
-        _fivetran_deleted AS date_delete,
-        _fivetran_synced AS date_load
+        CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_fivetran_synced)) as utc_date_load
 
     from src_users
 
