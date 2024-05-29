@@ -16,7 +16,7 @@ renamed as (
 
     select
         order_id,
-        shipping_service,
+        md5(shipping_service) AS shipping_service_id,
         shipping_cost,
         address_id,
         created_at,

@@ -29,7 +29,6 @@ renamed as (
         'desconocido',
         0,
         0,
-        null,
         null
 
     )

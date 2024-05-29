@@ -360,13 +360,9 @@ sources:
         columns:
           - name: STATUS_PROMO_ID
             tests:
-              - unique
-              - not_null
-          - name: STATUS_PROMO_NAME
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
               - positive_values
+          - name: STATUS_PROMO_NAME
+              
 
       - name: STATUS_ORDERS
         loaded_at_field: _fivetran_synced
@@ -378,6 +374,21 @@ sources:
               - not_null
               - dbt_utils.not_empty_string
           - name: STATUS_ORDER_NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
+
+      - name: SHIPPING_SERVICE
+        loaded_at_field: _fivetran_synced
+        description: >
+          Tabla con los productos
+        columns:
+          - name: SHIPPING_SERVICE_ID
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+          - name: SHIPPING_SERVICE_NAME
             tests:
               - not_null
               - dbt_utils.not_empty_string

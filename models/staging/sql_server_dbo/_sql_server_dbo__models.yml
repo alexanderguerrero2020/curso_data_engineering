@@ -288,4 +288,15 @@ models:
         data_type: varchar
         description: ""
 
+  - name: stg_sql_server_dbo__shipping_service
+    description: ""
+    columns:
+      - name: shipping_service_id
+        data_type: varchar
+        description: ""
+
+      - name: shipping_service_name
+        data_type: varchar
+        description: ""
+
   
