@@ -16,11 +16,17 @@ renamed_casted AS (
         , PAGE_URL
         , EVENT_TYPE
         , USER_ID
-        , PRODUCT_ID
+        , CASE 
+            WHEN product_id = '' THEN 'sin producto'
+            ELSE product_id 
+          END as product_id
         , SESSION_ID
-        , CREATED_AT
-        , ORDER_ID
-        , CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_fivetran_synced)) as utc_date_load
+        , {{ convert_to_utc('CREATED_AT')}} as created_date
+        , CASE 
+            WHEN ORDER_ID = '' THEN 'sin orden'
+            ELSE ORDER_ID 
+          END as ORDER_ID
+        , {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
     FROM src_events
     )
 

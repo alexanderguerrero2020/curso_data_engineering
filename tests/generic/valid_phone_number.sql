@@ -3,6 +3,6 @@
     select *
     from {{ model }}
     where {{ column_name }} IS NULL
-       or {{ column_name }} !~ '^\d{3}-\d{3}-\d{4}$'
+       or {{ column_name }} != '^\d{3}-\d{3}-\d{4}$'
 
 {% endtest %}

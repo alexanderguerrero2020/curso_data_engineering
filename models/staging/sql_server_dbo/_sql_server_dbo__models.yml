@@ -1,7 +1,34 @@
 version: 2
 
 models:
-  - name: stg_sql_dbo_server__events
+  - name: stg_sql_server_dbo__addresses
+    description: ""
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: ""
+
+      - name: zipcode
+        data_type: number
+        description: ""
+
+      - name: country
+        data_type: varchar
+        description: ""
+
+      - name: address
+        data_type: varchar
+        description: ""
+
+      - name: state
+        data_type: varchar
+        description: ""
+
+      - name: utc_date_load
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__events
     description: ""
     columns:
       - name: event_id
@@ -36,46 +63,9 @@ models:
         data_type: varchar
         description: ""
 
-      - name: date_delete
-        data_type: boolean
-        description: ""
-
-      - name: date_load
+      - name: utc_date_load
         data_type: timestamp_tz
         description: ""
-
-
-  - name: stg_sql_server_dbo__addresses
-    description: ""
-    columns:
-      - name: address_id
-        data_type: varchar
-        description: ""
-
-      - name: zipcode
-        data_type: number
-        description: ""
-
-      - name: country
-        data_type: varchar
-        description: ""
-
-      - name: address
-        data_type: varchar
-        description: ""
-
-      - name: state
-        data_type: varchar
-        description: ""
-
-      - name: date_delete
-        data_type: boolean
-        description: ""
-
-      - name: date_load
-        data_type: timestamp_tz
-        description: ""
-
 
   - name: stg_sql_server_dbo__orders
     description: ""
@@ -84,7 +74,7 @@ models:
         data_type: varchar
         description: ""
 
-      - name: shipping_service
+      - name: shipping_service_id
         data_type: varchar
         description: ""
 
@@ -128,18 +118,13 @@ models:
         data_type: varchar
         description: ""
 
-      - name: status
+      - name: status_order_id
         data_type: varchar
         description: ""
 
-      - name: _fivetran_deleted
-        data_type: boolean
-        description: ""
-
-      - name: _fivetran_synced
+      - name: utc_date_load
         data_type: timestamp_tz
         description: ""
-
 
   - name: stg_sql_server_dbo__order_items
     description: ""
@@ -156,15 +141,10 @@ models:
         data_type: number
         description: ""
 
-      - name: date_delete
-        data_type: boolean
-        description: ""
-
-      - name: date_load
+      - name: utc_date_load
         data_type: timestamp_tz
         description: ""
 
-    
   - name: stg_sql_server_dbo__products
     description: ""
     columns:
@@ -184,11 +164,7 @@ models:
         data_type: number
         description: ""
 
-      - name: date_delete
-        data_type: boolean
-        description: ""
-
-      - name: date_load
+      - name: utc_date_load
         data_type: timestamp_tz
         description: ""
 
@@ -202,21 +178,50 @@ models:
       - name: promo_name
         data_type: varchar
         description: ""
-        
-      - name: discount
+
+      - name: discount_dolares
         data_type: number
         description: ""
 
-      - name: status
+      - name: status_promo_id
+        data_type: number
+        description: ""
+
+      - name: utc_date_load
+        data_type: timestamp_tz
+        description: ""
+
+  - name: stg_sql_server_dbo__shipping_service
+    description: ""
+    columns:
+      - name: shipping_service_id
         data_type: varchar
         description: ""
 
-      - name: date_delete
-        data_type: boolean
+      - name: shipping_service_name
+        data_type: varchar
         description: ""
 
-      - name: date_load
-        data_type: timestamp_tz
+  - name: stg_sql_server_dbo__status_orders
+    description: ""
+    columns:
+      - name: status_order_id
+        data_type: varchar
+        description: ""
+
+      - name: status_name
+        data_type: varchar
+        description: ""
+
+  - name: stg_sql_server_dbo__status_promos
+    description: ""
+    columns:
+      - name: status_promo_name
+        data_type: varchar
+        description: ""
+
+      - name: status_promo_id
+        data_type: varchar
         description: ""
 
   - name: stg_sql_server_dbo__users
@@ -258,45 +263,6 @@ models:
         data_type: varchar
         description: ""
 
-      - name: date_delete
-        data_type: boolean
-        description: ""
-
-      - name: date_load
+      - name: utc_date_load
         data_type: timestamp_tz
         description: ""
-
-  - name: stg_sql_server_dbo__status_promos
-    description: ""
-    columns:
-      - name: status_promo_id
-        data_type: boolean
-        description: ""
-
-      - name: status_promo_name
-        data_type: varchar
-        description: ""
-
-  - name: stg_sql_server_dbo__status_orders
-    description: ""
-    columns:
-      - name: status_order_id
-        data_type: varchar
-        description: ""
-
-      - name: status_order_name
-        data_type: varchar
-        description: ""
-
-  - name: stg_sql_server_dbo__shipping_service
-    description: ""
-    columns:
-      - name: shipping_service_id
-        data_type: varchar
-        description: ""
-
-      - name: shipping_service_name
-        data_type: varchar
-        description: ""
-
-  

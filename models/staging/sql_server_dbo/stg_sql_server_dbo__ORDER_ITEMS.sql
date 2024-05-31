@@ -20,7 +20,7 @@ renamed as (
         order_id,
         product_id,
         quantity,
-        CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_fivetran_synced)) as utc_date_load
+        {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
 
     from src_order_items
 
