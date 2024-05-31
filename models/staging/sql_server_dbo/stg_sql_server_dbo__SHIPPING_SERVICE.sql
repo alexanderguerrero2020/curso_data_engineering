@@ -17,7 +17,7 @@ renamed as (
     select
         distinct(md5(shipping_service)) AS shipping_service_id,
         CASE 
-            WHEN shipping_service = '' THEN 'sin_shipping_service'
+            WHEN shipping_service = '' THEN 'sin shipping service'
             ELSE shipping_service
         END as shipping_service_name
         

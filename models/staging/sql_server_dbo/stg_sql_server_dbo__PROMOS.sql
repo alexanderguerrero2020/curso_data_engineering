@@ -20,13 +20,13 @@ renamed as (
         promo_id as promo_name,
         discount as discount_dolares,
         IFF(status = 'active', '1', '0') as status_promo_id,
-        CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_fivetran_synced)) as utc_date_load
+        {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
 
     from src_promos 
     union all
     select
-        md5('desconocido'),
-        'desconocido',
+        md5('sin_promo'),
+        'sin promo',
         0,
         0,
         null

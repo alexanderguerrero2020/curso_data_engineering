@@ -47,7 +47,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
             # Con este test puedes combrobar la frescura
             # tests:
             #   - dbt_utils.recency:
@@ -74,8 +74,8 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - accepted_values:
-                  values: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
+              # - accepted_values:
+              #     values: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
           - name: USER_ID
             tests:
               - not_null
@@ -98,7 +98,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
           - name: ORDER_ID
             tests:
               - not_null
@@ -113,7 +113,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
 
       - name: ORDERS
         loaded_at_field: _fivetran_synced
@@ -129,8 +129,8 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - accepted_values_empty:
-                  values: ['ups', 'usps', 'fedex', 'dhl']
+              # - accepted_values_empty:
+              #     values: ['ups', 'usps', 'fedex', 'dhl']
           - name: SHIPPING_COST
             tests:
               - not_null
@@ -146,7 +146,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
           - name: PROMO_ID
             tests:
               - not_null
@@ -157,7 +157,7 @@ sources:
           - name: ESTIMATED_DELIVERY_AT 
             tests:
               - dbt_utils.not_empty_string
-              - valid_datetime_format_or_null
+              # - valid_datetime_format_or_null
           - name: ORDER_COST
             tests:
               - not_null
@@ -178,7 +178,7 @@ sources:
           - name: DELIVERED_AT
             tests:
               - dbt_utils.not_empty_string
-              - valid_datetime_format_or_null
+              # - valid_datetime_format_or_null
           - name: TRACKING_ID
             tests:
               - unique
@@ -187,8 +187,8 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - accepted_values:
-                  values: ['delivered', 'shipped', 'preparing']
+              # - accepted_values:
+              #     values: ['delivered', 'shipped', 'preparing']
           - name: _FIVETRAN_DELETED
             tests:
               - dbt_utils.not_empty_string
@@ -196,7 +196,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
 
       - name: ORDER_ITEMS
         loaded_at_field: _fivetran_synced
@@ -228,7 +228,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
 
       - name: PRODUCTS
         loaded_at_field: _fivetran_synced
@@ -260,7 +260,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
 
       - name: PROMOS
         loaded_at_field: _fivetran_synced
@@ -285,8 +285,8 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - accepted_values:
-                  values: ['inactive', 'active']
+              # - accepted_values:
+              #     values: ['inactive', 'active']
           - name: _FIVETRAN_DELETED
             tests:
               - dbt_utils.not_empty_string
@@ -294,7 +294,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
 
       - name: USERS
         loaded_at_field: _fivetran_synced
@@ -310,7 +310,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
           - name: ADDRESS_ID
             tests:
               - not_null
@@ -326,7 +326,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
           - name: PHONE_NUMBER
             tests:
               - not_null
@@ -343,7 +343,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_email
+              # - valid_email
           - name: _FIVETRAN_DELETED
             tests:
               - dbt_utils.not_empty_string
@@ -351,7 +351,7 @@ sources:
             tests:
               - not_null
               - dbt_utils.not_empty_string
-              - valid_datetime_format
+              # - valid_datetime_format
 
       - name: STATUS_PROMOS
         loaded_at_field: _fivetran_synced

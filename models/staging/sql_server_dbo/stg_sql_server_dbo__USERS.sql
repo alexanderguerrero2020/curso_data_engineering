@@ -17,16 +17,16 @@ renamed as (
 
     select
         user_id,
-        updated_at,
+        {{ convert_to_utc('updated_at')}} as updated_date,
         address_id,
         last_name,
-        created_at,
+        {{ convert_to_utc('created_at')}} as created_date,
         phone_number,
         total_orders,
         first_name,
         email,
         coalesce (regexp_like(email, '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')= true,false) as is_valid_email_address,
-        CONVERT_TIMEZONE('UTC', TO_TIMESTAMP_TZ(_fivetran_synced)) as utc_date_load
+        {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
     from src_users
 
 )
