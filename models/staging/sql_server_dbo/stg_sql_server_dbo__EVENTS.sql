@@ -17,15 +17,16 @@ renamed_casted AS (
         , EVENT_TYPE
         , USER_ID
         , CASE 
-            WHEN product_id = '' THEN 'sin producto'
+            WHEN product_id = '' THEN md5('sin_producto')
             ELSE product_id 
           END as product_id
         , SESSION_ID
         , {{ convert_to_utc('CREATED_AT')}} as created_date
         , CASE 
-            WHEN ORDER_ID = '' THEN 'sin orden'
+            WHEN ORDER_ID = '' THEN md5('sin_orden')
             ELSE ORDER_ID 
           END as ORDER_ID
+        , _FIVETRAN_DELETED as deleted
         , {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
     FROM src_events
     )

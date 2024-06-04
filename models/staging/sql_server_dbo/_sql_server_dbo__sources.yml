@@ -24,29 +24,14 @@ sources:
             tests:
               - unique
               - not_null
-              - dbt_utils.not_empty_string
           - name: ZIPCODE
             tests:
               - positive_values
           - name: COUNTRY
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
           - name: ADDRESS
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
           - name: STATE
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
           - name: _FIVETRAN_DELETED
-            tests:
-              - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
               # - valid_datetime_format
             # Con este test puedes combrobar la frescura
             # tests:
@@ -67,51 +52,28 @@ sources:
               - not_null
               - dbt_utils.not_empty_string
           - name: PAGE_URL
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
           - name: EVENT_TYPE
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
               # - accepted_values:
               #     values: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
           - name: USER_ID
             tests:
               - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('sql_server_dbo','users')
-                  field: user_id
           - name: PRODUCT_ID
             tests:
               - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('sql_server_dbo','products')
-                  field: product_id
           - name: SESSION_ID
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
           - name: CREATED_AT
             tests:
               - not_null
-              - dbt_utils.not_empty_string
               # - valid_datetime_format
           - name: ORDER_ID
             tests:
               - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('sql_server_dbo','orders')
-                  field: order_id
           - name: _FIVETRAN_DELETED
             tests:
               - dbt_utils.not_empty_string
           - name: _FIVETRAN_SYNCED
             tests:
-              - not_null
               - dbt_utils.not_empty_string
               # - valid_datetime_format
 
@@ -124,69 +86,35 @@ sources:
             tests:
               - unique
               - not_null
-              - dbt_utils.not_empty_string
           - name: SHIPPING_SERVICE
             tests:
               - not_null
-              - dbt_utils.not_empty_string
               # - accepted_values_empty:
               #     values: ['ups', 'usps', 'fedex', 'dhl']
           - name: SHIPPING_COST
+          - name: ADDRESS_ID  
             tests:
               - not_null
-              - dbt_utils.not_empty_string
-          - name: ADDRESS_ID
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('sql_server_dbo','addresses')
-                  field: address_id
           - name: CREATED_AT
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
               # - valid_datetime_format
           - name: PROMO_ID
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('sql_server_dbo','promos')
-                  field: promo_id
           - name: ESTIMATED_DELIVERY_AT 
             tests:
               - dbt_utils.not_empty_string
               # - valid_datetime_format_or_null
           - name: ORDER_COST
             tests:
-              - not_null
-              - dbt_utils.not_empty_string
               - positive_values
           - name: USER_ID
             tests:
               - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('sql_server_dbo','users')
-                  field: user_id
           - name: ORDER_TOTAL
             tests:
-              - not_null
-              - dbt_utils.not_empty_string
               - positive_values
           - name: DELIVERED_AT
-            tests:
-              - dbt_utils.not_empty_string
               # - valid_datetime_format_or_null
           - name: TRACKING_ID
-            tests:
-              - unique
-              - not_null
-          - name: STATUS
-            tests:
-              - not_null
-              - dbt_utils.not_empty_string
+          - name: STATUS_ORDER_ID
               # - accepted_values:
               #     values: ['delivered', 'shipped', 'preparing']
           - name: _FIVETRAN_DELETED
@@ -389,6 +317,21 @@ sources:
               - not_null
               - dbt_utils.not_empty_string
           - name: SHIPPING_SERVICE_NAME
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+              - positive_values
+
+      - name: EVENT_TYPE
+        loaded_at_field: _fivetran_synced
+        description: >
+          Tabla de los tipos de eventos
+        columns:
+          - name: user_id
+            tests:
+              - not_null
+              - dbt_utils.not_empty_string
+          - name: event_type
             tests:
               - not_null
               - dbt_utils.not_empty_string

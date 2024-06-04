@@ -23,6 +23,13 @@ renamed as (
         {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
 
     from src_products
+    union all
+    select
+        md5('sin_producto'),
+        0,
+        'Sin prodcto',
+        0,
+        null
 )
 
 select * from renamed
