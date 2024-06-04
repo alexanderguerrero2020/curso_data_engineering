@@ -20,6 +20,7 @@ renamed as (
         promo_id as promo_name,
         discount as discount_dolares,
         IFF(status = 'active', '1', '0') as status_promo_id,
+        _fivetran_deleted,
         {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
 
     from src_promos 
@@ -29,6 +30,7 @@ renamed as (
         'sin promo',
         0,
         0,
+        null,
         null
 
     )

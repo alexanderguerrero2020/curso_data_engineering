@@ -5,18 +5,17 @@
 }}
 
 with 
-
 source as (
 
-    select status from {{ source('sql_server_dbo', 'PROMOS') }}
+    select status_promo_id from {{ ref('stg_sql_server_dbo__PROMOS') }}
 
 ),
 
 renamed as (
 
     select
-        distinct(status) as status_promo_name,
-        IFF(status = 'active', '1', '0') as status_promo_id
+        distinct(status_promo_id) as status_promo_id,
+        IFF(status_promo_id = '1', 'active', 'inactive') as status_promo_name
 
     from source
 
