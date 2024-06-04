@@ -4,22 +4,17 @@
   )
 }}
 
-{% set event_types = obtener_valores(ref('stg_sql_server_dbo__EVENTS'),'event_type') %}
-
-WITH stg_events AS (
+WITH src_events AS (
     SELECT * 
-    FROM {{ ref('stg_sql_server_dbo__EVENTS') }}
+    FROM {{ ref('base_sql_server_dbo__EVENTS') }}
+    
     ),
 
 renamed_casted AS (
     SELECT
-        user_id,
-        {%- for event_type in event_types   %}
-        sum(case when event_type = '{{event_type}}' then 1 end) as {{event_type}}_amount
-        {%- if not loop.last %},{% endif -%}
-        {% endfor %}
-    FROM stg_events
-    GROUP BY 1
+        distinct(md5(EVENT_TYPE)) as EVENT_TYPE_ID,
+        EVENT_TYPE as EVENT_TYPE_NAME
+    FROM src_events
     )
 
 SELECT * FROM renamed_casted

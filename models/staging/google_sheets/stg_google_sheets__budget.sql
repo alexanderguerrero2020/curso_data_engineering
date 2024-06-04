@@ -11,7 +11,7 @@ WITH stg_budget_products AS (
 
 {% if is_incremental() %}
 
-	  WHERE _fivetran_synced > (SELECT MAX(_fivetran_synced) FROM {{ this }} )
+	  WHERE _fivetran_synced < (SELECT MAX(_fivetran_synced) FROM {{ this }} )
 
 {% endif %}
     ),
