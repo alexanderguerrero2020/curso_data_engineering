@@ -1,44 +1,36 @@
 with 
 
-src_orders as (
+src_pedidos as (
     
-    select * from {{ ref('stg_sql_server_dbo__ORDERS') }}
-
-    
-    
-),
-
-src_order_items as(
-
-    select * from {{ ref('stg_sql_server_dbo__ORDER_ITEMS') }}
+    select * from {{ ref('int__pedidos') }}
 
 ),
 
 renamed as (
+    
     select 
-        row_number() over(PARTITION BY A.order_id ORDER BY A.order_id) as transaction_line,
-        A.order_id,
-        B.product_id,
-        B.quantity,
+        order_id,
+        product_id,
+        quantity,
+        price,
+        precio_productos,
         shipping_service_id,
-        shipping_cost,
+        shipping_cost_product, 
         address_id,
         utc_created_date,
         month,
         promo_id,
+        discount_dolares_product,
         utc_estimated_delivery_date,
         order_cost,
         user_id,
+        precio_producto_total,
         order_total,
         utc_delivered_date,
         tracking_id,
         status_order_id,
-        A.utc_date_load
-    from 
-        src_orders A
-    JOIN  
-        src_order_items B
-    ON A.order_id = B.order_id
+        utc_date_load 
+    FROM src_pedidos
 )
 
 select * from renamed

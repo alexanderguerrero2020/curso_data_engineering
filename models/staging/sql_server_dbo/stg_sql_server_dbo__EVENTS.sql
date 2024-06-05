@@ -1,9 +1,3 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
-
 WITH src_events AS (
     SELECT * 
     FROM {{ ref('base_sql_server_dbo__EVENTS') }}

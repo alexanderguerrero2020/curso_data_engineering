@@ -27,7 +27,7 @@ renamed as (
     union all
     select
         md5('sin_promo'),
-        'sin promo',
+        'sin_promo'::VARCHAR,
         0,
         0,
         null,

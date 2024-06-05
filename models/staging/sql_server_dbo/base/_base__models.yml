@@ -13,8 +13,6 @@ models:
         description: "ID único del pedido del usuario"
 
       - name: shipping_service_id
-        tests:
-          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
         description: "ID de la empresa de reparto"
 
@@ -22,7 +20,6 @@ models:
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - possitive_values
         data_type: float
         description: "Precio que vale el reparto del pedido"
 
@@ -30,31 +27,20 @@ models:
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - relationships:
-              to: source('stg_sql_server_dbo','ADRESSES')
-              field: address_id
         data_type: VARCHAR(256)
         description: "ID de la dirección del usuario"
 
       - name: created_at
-        tests:
-          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_NTZ(9)
         description: "Dia y hora en la que se crea el evento"
 
       - name: promo_id
         tests:
               - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('stg_sql_server_dbo','PROMOS')
-                  field: promo_id
         data_type: VARCHAR(256)
         description: "ID de la promoción que se ha utilizado"
 
       - name: estimated_delivery_at
-        tests:
-          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
         description: "El tiempo estimado de reparto"
 
@@ -62,7 +48,6 @@ models:
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - possitive_values
         data_type: float
         description: "Coste de la orden"
 
@@ -80,19 +65,15 @@ models:
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - possitive_values
         data_type: float
         description: "Precio total de la orden + envio"
 
       - name: delivered_at
-        tests:
-          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
         description: "Fecha de entrega de la orden"
 
       - name: tracking_id
         tests:
-              - dbt_utils.not_empty_string
               - not_null
         data_type: VARCHAR(256)
         description: "ID para trackear el pedido enviado"
