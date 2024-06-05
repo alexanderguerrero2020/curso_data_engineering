@@ -1,6 +1,6 @@
 {{ config(
-    materialized='incremental',
-    unique_key = '_row'
+    materialized='view',
+   
     ) 
     }}
 
@@ -9,11 +9,11 @@ WITH stg_budget_products AS (
     SELECT * 
     FROM {{ source('google_sheets','budget') }}
 
-{% if is_incremental() %}
+-- {% if is_incremental() %}
+    -- unique_key = '_row'
+-- 	  WHERE _fivetran_synced < (SELECT MAX(_fivetran_synced) FROM {{ this }} )
 
-	  WHERE _fivetran_synced < (SELECT MAX(_fivetran_synced) FROM {{ this }} )
-
-{% endif %}
+-- {% endif %}
     ),
 
 renamed_casted AS (
