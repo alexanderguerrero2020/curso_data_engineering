@@ -2,7 +2,10 @@ version: 2
 
 models:
   - name: stg_sql_server_dbo__addresses
-    description: "Tabla de dirección"
+    # config:
+    #   contract:
+    #     enforced: true
+    description: "Tabla que contiene las direcciones de los usuarios"
     columns:
       - name: address_id
         tests:
@@ -10,71 +13,80 @@ models:
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "Identificador de dirección"
+        description: "Identificador único de la dirección"
 
       - name: zipcode
         tests:
           - not_null
           - dbt_utils.not_empty_string
         data_type: NUMBER(38,0)
-        description: "Código postal"
+        description: "Código postal de la dirección"
 
       - name: country
         tests:
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "País"
+        description: "País de la dirección"
 
       - name: address
         tests:
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "Dirección"
+        description: "Dirección completa"
 
       - name: state
         tests:
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "Estado del país"
+        description: "Estado o provincia de la dirección"
 
       - name: deleted
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: boolean
-        description: "Responde a si se ha elimado la fila"
+        description: "Indica si la fila ha sido eliminada"
 
       - name: utc_date_load
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: "Día y hora en el que se carga la información"
+        description: "Fecha y hora en que se cargó la información"
 
   - name: stg_sql_server_dbo__events
-    description: "Tabla de eventos de los usuarios"
+    # config:
+    #   contract:
+    #     enforced: true
+    description: "Tabla que contiene los eventos de los usuarios"
     columns:
       - name: event_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "Identificador único para el evento y usuario"
+        description: "Identificador único para el evento y el usuario"
 
       - name: page_url
         tests:
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "Página sobre la que se realiza el evento"
+        description: "URL de la página donde ocurrió el evento"
 
       - name: event_type_id
         tests:
           - not_null
           - dbt_utils.not_empty_string
           - relationships:
-              to: source('stg_sql_server_dbo','EVENT_TYPE')
+              to: source('stg_sql_server_dbo','event_type')
               field: event_type_id
         data_type: VARCHAR(256)
-        description: "Tipo de evento que es"
+        description: "Identificador del tipo de evento"
 
       - name: user_id
         data_type: VARCHAR(256)
@@ -82,62 +94,66 @@ models:
           - not_null
           - dbt_utils.not_empty_string
           - relationships:
-              to: source('stg_sql_server_dbo','USERS')
+              to: source('stg_sql_server_dbo','users')
               field: user_id
-        description: "Identificador del usuario que realiza el evento"
+        description: "Identificador del usuario que realizó el evento"
 
       - name: product_id
         tests:
           - not_null
           - dbt_utils.not_empty_string
           - relationships:
-              to: source('stg_sql_server_dbo','PRODUCTS')
+              to: source('stg_sql_server_dbo','products')
               field: product_id
         data_type: VARCHAR(256)
-        description: "Identificador del producto si se realiza un evento con él"
+        description: "Identificador del producto relacionado con el evento"
 
       - name: session_id
         tests:
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "ID de la sesión que esta el usuario"
+        description: "Identificador de la sesión del usuario"
 
       - name: created_at
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_NTZ(9)
-        description: "Año, mes, dia y hora en la que se crea el evento"
+        description: "Fecha y hora en que se creó el evento"
 
       - name: month
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: DATE
-        description: "Año, mes y dia en la que se crea el evento"
+        description: "Mes en que se creó el evento"
 
       - name: order_id
         tests:
           - dbt_utils.not_empty_string
           - relationships:
-              to: source('sql_server_dbo','ORDERS')
+              to: source('stg_sql_server_dbo','orders')
               field: order_id
         data_type: VARCHAR(256)
-        description: "ID de la orden si se crea una orden"
+        description: "Identificador de la orden si está relacionada con el evento"
 
       - name: deleted
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: boolean
-        description: "Responde a si se ha elimado la fila"
+        description: "Indica si la fila ha sido eliminada"
 
       - name: utc_date_load
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: "Día y hora en el que se carga la información"
+        description: "Fecha y hora en que se cargó la información"
 
   - name: stg_sql_server_dbo__orders
-    description: ""
+    description: "Tabla que contiene las órdenes realizadas por los usuarios"
     columns:
       - name: order_id
         tests:
@@ -145,280 +161,414 @@ models:
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "ID único del pedido del usuario"
+        description: "Identificador único de la orden"
 
       - name: shipping_service_id
         tests:
+          - not_null
           - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','shipping_service')
+              field: shipping_service_id
         data_type: VARCHAR(256)
-        description: "ID de la empresa de reparto"
+        description: "Identificador del servicio de envío"
 
       - name: shipping_cost
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - possitive_values
+          - positive_values
         data_type: float
-        description: "Precio que vale el reparto del pedido"
+        description: "Costo del envío del pedido"
 
       - name: address_id
         tests:
           - not_null
           - dbt_utils.not_empty_string
           - relationships:
-              to: source('stg_sql_server_dbo','ADRESSES')
+              to: source('stg_sql_server_dbo','addresses')
               field: address_id
         data_type: VARCHAR(256)
-        description: "ID de la dirección del usuario"
+        description: "Identificador de la dirección del usuario"
 
       - name: created_at
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_NTZ(9)
-        description: "Dia y hora en la que se crea el evento"
+        description: "Fecha y hora en que se creó la orden"
 
       - name: promo_id
         tests:
-              - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('stg_sql_server_dbo','PROMOS')
-                  field: promo_id
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','promos')
+              field: promo_id
         data_type: VARCHAR(256)
-        description: "ID de la promoción que se ha utilizado"
+        description: "Identificador de la promoción utilizada"
 
       - name: estimated_delivery_at
         tests:
+          - not_null
           - dbt_utils.not_empty_string
+          - valid_datetime_or_null
         data_type: TIMESTAMP_TZ(9)
-        description: "El tiempo estimado de reparto"
+        description: "Tiempo estimado de entrega"
 
       - name: order_cost
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - possitive_values
+          - positive_values
         data_type: float
-        description: "Coste de la orden"
+        description: "Costo total de la orden"
 
       - name: user_id
         tests:
-              - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('stg_sql_server_dbo','USERS')
-                  field: user_id
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','users')
+              field: user_id
         data_type: VARCHAR(256)
-        description: "ID del usuario"
+        description: "Identificador del usuario que realizó la orden"
 
       - name: order_total
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - possitive_values
+          - positive_values
         data_type: float
-        description: "Precio total de la orden + envio"
+        description: "Costo total de la orden incluyendo el envío"
 
       - name: delivered_at
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: "Fecha de entrega de la orden"
+        description: "Fecha y hora en que se entregó la orden"
 
       - name: tracking_id
         tests:
-              - dbt_utils.not_empty_string
-              - not_null
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "ID para trackear el pedido enviado"
+        description: "Identificador para rastrear el pedido"
 
       - name: status_order_id
         tests:
           - not_null
           - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','status_orders')
+              field: status_order_id
         data_type: VARCHAR(256)
-        description: "Estado de la orden"
+        description: "Estado actual de la orden"
 
       - name: deleted
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: boolean
-        description: "Responde a si se ha elimado la fila"
+        description: "Indica si la fila ha sido eliminada"
         
       - name: utc_date_load
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: "Fecha en la que se ha cargado los datos"
-    
+        description: "Fecha y hora en que se cargaron los datos"
+
   - name: stg_sql_server_dbo__order_items
-    description: "Tabla de los artículos que tengan la orden"
+    description: "Tabla que contiene los artículos incluidos en las órdenes"
     columns:
       - name: order_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','orders')
+              field: order_id
         data_type: VARCHAR(256)
-        description: "ID de la orden de los artículos"
+        description: "Identificador de la orden a la que pertenecen los artículos"
 
       - name: product_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','products')
+              field: product_id
         data_type: VARCHAR(256)
-        description: "ID de los artículos de la orden"
+        description: "Identificador del producto incluido en la orden"
 
       - name: quantity
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: NUMBER(38,0)
-        description: "Cantidad de los productos"
+        description: "Cantidad del producto en la orden"
 
       - name: deleted
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: boolean
-        description: "Responde a si se ha elimado la fila"
+        description: "Indica si la fila ha sido eliminada"
 
       - name: utc_date_load
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: "Fecha en la que se ha cargado los datos"
+        description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__products
-    description: "Tabla con la lista de los productos"
+    description: "Tabla que contiene la lista de productos disponibles"
     columns:
       - name: product_id
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador único del producto"
 
       - name: price
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
         data_type: float
-        description: ""
+        description: "Precio del producto"
 
       - name: name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Nombre del producto"
 
       - name: inventory
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: NUMBER(38,0)
-        description: ""
+        description: "Cantidad disponible en el inventario"
 
       - name: deleted
         tests:
+          - not_null
           - dbt_utils.not_empty_string
         data_type: boolean
-        description: "Responde a si se ha elimado la fila"
+        description: "Indica si la fila ha sido eliminada"
 
       - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: ""
+        description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__promos
-    description: "Tabla de las promociones"
+    description: "Tabla que contiene las promociones disponibles"
     columns:
       - name: promo_id
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador único de la promoción"
 
       - name: promo_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Nombre de la promoción"
 
       - name: discount_dolares
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
         data_type: NUMBER(38,0)
-        description: ""
+        description: "Descuento en dólares ofrecido por la promoción"
 
       - name: status_promo_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','status_promos')
+              field: status_promo_id
         data_type: NUMBER(38,0)
-        description: ""
+        description: "Identificador del estado de la promoción"
 
       - name: _fivetran_deleted
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: boolean
-        description: ""
+        description: "Indica si la fila ha sido eliminada por Fivetran"
 
       - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: ""
+        description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__shipping_service
-    description: "Tabala con los servicios de envio"
+    description: "Tabla que contiene los servicios de envío disponibles"
     columns:
       - name: shipping_service_id
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador único del servicio de envío"
 
       - name: shipping_service_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Nombre del servicio de envío"
 
   - name: stg_sql_server_dbo__status_orders
-    description: ""
+    description: "Tabla que contiene los estados de las órdenes"
     columns:
       - name: status_order_id
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador único del estado de la orden"
 
       - name: status_order_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Nombre del estado de la orden"
 
   - name: stg_sql_server_dbo__status_promos
-    description: ""
+    description: "Tabla que contiene los estados de las promociones"
     columns:
       - name: status_promo_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Nombre del estado de la promoción"
 
       - name: status_promo_id
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador único del estado de la promoción"
 
   - name: stg_sql_server_dbo__users
-    description: ""
+    description: "Tabla que contiene la información de los usuarios"
     columns:
       - name: user_id
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador único del usuario"
 
       - name: updated_at
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: ""
+        description: "Fecha y hora de la última actualización del usuario"
 
       - name: address_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: source('stg_sql_server_dbo','addresses')
+              field: address_id
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador de la dirección del usuario"
 
       - name: last_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Apellido del usuario"
 
       - name: created_at
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: ""
+        description: "Fecha y hora en que se creó el usuario"
 
       - name: phone_number
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - valid_phone_number_or_null
         data_type: VARCHAR(256)
-        description: ""
+        description: "Número de teléfono del usuario"
 
       - name: total_orders
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
         data_type: NUMBER(38,0)
-        description: ""
+        description: "Total de órdenes realizadas por el usuario"
 
       - name: first_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Nombre del usuario"
 
       - name: email
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - valid_email
         data_type: VARCHAR(256)
-        description: ""
+        description: "Correo electrónico del usuario"
 
       - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: ""
-
+        description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__event_type
-    description: "Tabla con los tipos de eventos"
+    description: "Tabla que contiene los tipos de eventos"
     columns:
       - name: event_type_id
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
+        description: "Identificador único del tipo de evento"
 
       - name: event_type_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: ""
-
+        description: "Nombre del tipo de evento"
