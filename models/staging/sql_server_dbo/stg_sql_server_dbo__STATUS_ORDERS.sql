@@ -17,6 +17,7 @@ renamed as (
         distinct(md5(status_order_id)) as status_order_id,
         IFF(status_order_id='','sin_status_orden',status_order_id) as status_order_name
     from source
+    
 )
 
 select * from renamed

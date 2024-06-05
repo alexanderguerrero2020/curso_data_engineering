@@ -118,39 +118,46 @@ models:
 
   
   - name: base_sql_server_dbo__events
-    description: "Tabla con los pedidos de los usuarios"
+    description: "Tabla de eventos de los usuarios"
     columns:
-      - name: order_id
+      - name: event_id
+        data_type: VARCHAR(256)
+        description: "Identificador único para el evento y usuario"
+
+      - name: page_url
         tests:
-          - unique
           - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "ID único del pedido del usuario"
+        description: "Página sobre la que se realiza el evento"
 
-      - name: shipping_service_id
-        tests:
-          - dbt_utils.not_empty_string
-        data_type: VARCHAR(256)
-        description: "ID de la empresa de reparto"
-
-      - name: shipping_cost
+      - name: event_type
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - possitive_values
-        data_type: float
-        description: "Precio que vale el reparto del pedido"
+        data_type: VARCHAR(256)
+        description: "Tipo de evento que es"
 
-      - name: address_id
+      - name: user_id
+        data_type: VARCHAR(256)
         tests:
           - not_null
           - dbt_utils.not_empty_string
-          - relationships:
-              to: source('stg_sql_server_dbo','ADRESSES')
-              field: address_id
+        description: "Identificador del usuario que realiza el evento"
+
+      - name: product_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "ID de la dirección del usuario"
+        description: "Identificador del producto si se realiza un evento con él"
+
+      - name: session_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "ID de la sesión que esta el usuario"
 
       - name: created_at
         tests:
@@ -158,76 +165,23 @@ models:
         data_type: TIMESTAMP_NTZ(9)
         description: "Dia y hora en la que se crea el evento"
 
-      - name: promo_id
+      - name: order_id
         tests:
-              - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('stg_sql_server_dbo','PROMOS')
-                  field: promo_id
-        data_type: VARCHAR(256)
-        description: "ID de la promoción que se ha utilizado"
-
-      - name: estimated_delivery_at
-        tests:
-          - dbt_utils.not_empty_string
-        data_type: TIMESTAMP_TZ(9)
-        description: "El tiempo estimado de reparto"
-
-      - name: order_cost
-        tests:
-          - not_null
-          - dbt_utils.not_empty_string
-          - possitive_values
-        data_type: float
-        description: "Coste de la orden"
-
-      - name: user_id
-        tests:
-              - not_null
-              - dbt_utils.not_empty_string
-              - relationships:
-                  to: source('stg_sql_server_dbo','USERS')
-                  field: user_id
-        data_type: VARCHAR(256)
-        description: "ID del usuario"
-
-      - name: order_total
-        tests:
-          - not_null
-          - dbt_utils.not_empty_string
-          - possitive_values
-        data_type: float
-        description: "Precio total de la orden + envio"
-
-      - name: delivered_at
-        tests:
-          - dbt_utils.not_empty_string
-        data_type: TIMESTAMP_TZ(9)
-        description: "Fecha de entrega de la orden"
-
-      - name: tracking_id
-        tests:
-              - dbt_utils.not_empty_string
-              - not_null
-        data_type: VARCHAR(256)
-        description: "ID para trackear el pedido enviado"
-
-      - name: status_order_id
-        tests:
-          - not_null
           - dbt_utils.not_empty_string
         data_type: VARCHAR(256)
-        description: "Estado de la orden"
+        description: "ID de la orden si se crea una orden"
 
       - name: deleted
         tests:
           - dbt_utils.not_empty_string
         data_type: boolean
         description: "Responde a si se ha elimado la fila"
-        
+
       - name: utc_date_load
         tests:
           - dbt_utils.not_empty_string
         data_type: TIMESTAMP_TZ(9)
-        description: "Fecha en la que se ha cargado los datos"
+        description: "Día y hora en el que se carga la información"
+
+  
+    

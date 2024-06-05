@@ -37,24 +37,24 @@ renamed as (
         utc_date_load
 
     from src_orders
-    -- union all 
-    -- select
-    --     md5('sin_orden'),
-    --     'd41d8cd98f00b204e9800998ecf8427e',
-    --     0,
-    --     null,
-    --     null,
-    --     null,
-    --     md5('sin_promo'),
-    --     null,
-    --     0,
-    --     null,
-    --     0,
-    --     null,
-    --     md5('sin_tracking'),
-    --     md5('sin_status_orden'),
-    --     null,
-    --     null
+    union all 
+    select
+        md5('sin_orden'),
+        'd41d8cd98f00b204e9800998ecf8427e',
+        0,
+        null,
+        null,
+        null,
+        md5('sin_promo'),
+        null,
+        0,
+        null,
+        0,
+        null,
+        md5('sin_tracking'),
+        md5('sin_status_orden'),
+        null,
+        null
 )
 
 select * from renamed

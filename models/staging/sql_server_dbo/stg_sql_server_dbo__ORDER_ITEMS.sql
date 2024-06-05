@@ -20,6 +20,7 @@ renamed as (
         order_id,
         product_id,
         quantity,
+        _FIVETRAN_DELETED as deleted,
         {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
 
     from src_order_items

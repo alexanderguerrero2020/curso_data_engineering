@@ -20,6 +20,7 @@ renamed as (
         price,
         name,
         inventory,
+        _FIVETRAN_DELETED as deleted,
         {{ convert_to_utc('_fivetran_synced')}} as utc_date_load
 
     from src_products
@@ -29,6 +30,7 @@ renamed as (
         0,
         'Sin prodcto',
         0,
+        null,
         null
 )
 
