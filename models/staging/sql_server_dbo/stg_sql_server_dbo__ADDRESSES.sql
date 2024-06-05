@@ -10,6 +10,7 @@ src_addresses as (
 
     select * from {{ source('sql_server_dbo', 'ADDRESSES') }}
     WHERE _fivetran_deleted IS NULL
+    
 ),
 
 renamed as (

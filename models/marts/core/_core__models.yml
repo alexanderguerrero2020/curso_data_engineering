@@ -220,3 +220,34 @@ models:
       - name: date_week
         data_type: timestamp_ntz
         description: ""
+
+  - name: dim__addresses
+    description: ""
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: ""
+
+      - name: zipcode
+        data_type: number
+        description: ""
+
+      - name: country
+        data_type: varchar
+        description: ""
+
+      - name: address
+        data_type: varchar
+        description: ""
+
+      - name: state
+        data_type: varchar
+        description: ""
+
+      - name: deleted
+        data_type: boolean
+        description: ""
+
+      - name: utc_date_load
+        data_type: timestamp_tz
+        description: ""
