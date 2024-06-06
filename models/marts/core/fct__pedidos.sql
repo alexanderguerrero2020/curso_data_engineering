@@ -24,7 +24,7 @@ renamed as (
         utc_estimated_delivery_date,
         order_cost,
         user_id,
-        precio_producto_total,
+        ROUND(precio_producto_total) as precio_producto_total,
         order_total,
         utc_delivered_date,
         tracking_id,
