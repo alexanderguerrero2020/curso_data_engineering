@@ -1,0 +1,89 @@
+version: 2
+
+models:
+  - name: int__pedidos
+    description: "Tabla intermedia que contiene los pedidos realizados por los usuarios"
+    columns:
+      - name: order_id
+        data_type: VARCHAR(256)
+        description: "Identificador único del pedido"
+
+      - name: product_id
+        data_type: VARCHAR(256)
+        description: "Identificador del producto del pedido"
+
+      - name: quantity
+        data_type: NUMBER(38,0)
+        description: "Cantidad del producto en el pedido"
+
+      - name: price
+        data_type: float
+        description: "Precio unitario del producto en el pedido"
+
+      - name: precio_productos
+        data_type: float
+        description: "Precio total de los productos en el pedido"
+
+      - name: shipping_service_id
+        data_type: VARCHAR(256)
+        description: "Identificador del servicio de envío"
+
+      - name: shipping_cost_product
+        data_type: float
+        description: "Costo de envío del producto"
+
+      - name: address_id
+        data_type: VARCHAR(256)
+        description: "Identificador de la dirección de envío"
+
+      - name: utc_created_date
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se creó el pedido en UTC"
+
+      - name: month
+        data_type: date
+        description: "Mes en que se realizó el pedido"
+
+      - name: promo_id
+        data_type: VARCHAR(256)
+        description: "Identificador de la promoción aplicada al pedido"
+
+      - name: discount_dolares_product
+        data_type: NUMBER(38,0)
+        description: "Descuento en dólares aplicado al producto"
+
+      - name: utc_estimated_delivery_date
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora estimada de entrega en UTC"
+
+      - name: order_cost
+        data_type: float
+        description: "Costo total del pedido"
+
+      - name: user_id
+        data_type: VARCHAR(256)
+        description: "Identificador del usuario que realizó el pedido"
+
+      - name: precio_producto_total
+        data_type: float
+        description: "Precio total del producto en el pedido"
+
+      - name: order_total
+        data_type: float
+        description: "Costo total del pedido incluyendo el envío"
+
+      - name: utc_delivered_date
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se entregó el pedido en UTC"
+
+      - name: tracking_id
+        data_type: VARCHAR(256)
+        description: "Identificador para rastrear el pedido"
+
+      - name: status_order_id
+        data_type: VARCHAR(256)
+        description: "Identificador del estado del pedido"
+
+      - name: utc_date_load
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se cargaron los datos en UTC"
