@@ -28,7 +28,7 @@ renamed as (
     select 
         A.order_id,
         B.product_id,
-        B.quantity,
+        B.quantity as quantity,
         C.price,
         (B.quantity * C.price) as precio_productos,
         shipping_service_id,

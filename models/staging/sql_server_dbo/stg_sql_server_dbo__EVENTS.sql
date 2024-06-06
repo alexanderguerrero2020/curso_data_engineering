@@ -9,6 +9,7 @@ renamed_casted AS (
         EVENT_ID
         , PAGE_URL
         , md5(EVENT_TYPE) as EVENT_TYPE_ID
+        , EVENT_TYPE as EVENT_TYPE_NAME
         , USER_ID
         , CASE 
             WHEN product_id = '' THEN md5('sin_producto')

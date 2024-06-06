@@ -88,6 +88,13 @@ models:
         data_type: VARCHAR(256)
         description: "Identificador del tipo de evento"
 
+      - name: event_type_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre del tipo de evento"
+
       - name: user_id
         data_type: VARCHAR(256)
         tests:
