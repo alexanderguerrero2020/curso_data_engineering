@@ -2,9 +2,9 @@ version: 2
 
 models:
   - name: stg_sql_server_dbo__addresses
-    # config:
-    #   contract:
-    #     enforced: true
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene las direcciones de los usuarios"
     columns:
       - name: address_id
@@ -58,9 +58,9 @@ models:
         description: "Fecha y hora en que se cargó la información"
 
   - name: stg_sql_server_dbo__events
-    # config:
-    #   contract:
-    #     enforced: true
+    config:
+     contract:
+      enforced: true
     description: "Tabla que contiene los eventos de los usuarios"
     columns:
       - name: event_id
@@ -153,6 +153,9 @@ models:
         description: "Fecha y hora en que se cargó la información"
 
   - name: stg_sql_server_dbo__orders
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene las órdenes realizadas por los usuarios"
     columns:
       - name: order_id
@@ -281,6 +284,9 @@ models:
         description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__order_items
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene los artículos incluidos en las órdenes"
     columns:
       - name: order_id
@@ -325,6 +331,9 @@ models:
         description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__products
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene la lista de productos disponibles"
     columns:
       - name: product_id
@@ -372,6 +381,9 @@ models:
         description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__promos
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene las promociones disponibles"
     columns:
       - name: promo_id
@@ -422,6 +434,9 @@ models:
         description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__shipping_service
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene los servicios de envío disponibles"
     columns:
       - name: shipping_service_id
@@ -440,6 +455,9 @@ models:
         description: "Nombre del servicio de envío"
 
   - name: stg_sql_server_dbo__status_orders
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene los estados de las órdenes"
     columns:
       - name: status_order_id
@@ -458,6 +476,9 @@ models:
         description: "Nombre del estado de la orden"
 
   - name: stg_sql_server_dbo__status_promos
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene los estados de las promociones"
     columns:
       - name: status_promo_name
@@ -476,6 +497,9 @@ models:
         description: "Identificador único del estado de la promoción"
 
   - name: stg_sql_server_dbo__users
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene la información de los usuarios"
     columns:
       - name: user_id
@@ -556,6 +580,9 @@ models:
         description: "Fecha y hora en que se cargaron los datos"
 
   - name: stg_sql_server_dbo__event_type
+    config:
+      contract:
+        enforced: true
     description: "Tabla que contiene los tipos de eventos"
     columns:
       - name: event_type_id

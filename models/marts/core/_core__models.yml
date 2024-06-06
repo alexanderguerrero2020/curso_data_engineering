@@ -2,252 +2,896 @@ version: 2
 
 models:
   - name: dim__dates
-    description: ""
+    description: "Tabla que contiene información detallada sobre las fechas"
+    config:
+      contracts:
+        enabled: true
     columns:
       - name: date_day
         data_type: date
-        description: ""
+        description: "El día de la fecha"
 
       - name: prior_date_day
         data_type: date
-        description: ""
+        description: "El día anterior a la fecha"
 
       - name: next_date_day
         data_type: date
-        description: ""
+        description: "El día siguiente a la fecha"
 
       - name: prior_year_date_day
         data_type: date
-        description: ""
+        description: "El día correspondiente del año anterior"
 
       - name: prior_year_over_year_date_day
         data_type: date
-        description: ""
+        description: "El día correspondiente en años anteriores"
 
       - name: day_of_week
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El día de la semana (1-7)"
 
       - name: day_of_week_iso
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El día de la semana ISO (1-7)"
 
       - name: day_of_week_name
-        data_type: varchar
-        description: ""
+        data_type: VARCHAR(256)
+        description: "El nombre del día de la semana"
 
       - name: day_of_week_name_short
-        data_type: varchar
-        description: ""
+        data_type: VARCHAR(256)
+        description: "El nombre corto del día de la semana"
 
       - name: day_of_month
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El día del mes (1-31)"
 
       - name: day_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El día del año (1-365)"
 
       - name: week_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio de la semana"
 
       - name: week_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización de la semana"
 
       - name: prior_year_week_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio de la semana en el año anterior"
 
       - name: prior_year_week_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización de la semana en el año anterior"
 
       - name: week_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana del año"
 
       - name: iso_week_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio de la semana ISO"
 
       - name: iso_week_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización de la semana ISO"
 
       - name: prior_year_iso_week_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio de la semana ISO en el año anterior"
 
       - name: prior_year_iso_week_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización de la semana ISO en el año anterior"
 
       - name: iso_week_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana ISO del año"
 
       - name: prior_year_week_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana del año en el año anterior"
 
       - name: prior_year_iso_week_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana ISO del año en el año anterior"
 
       - name: month_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número del mes del año"
 
       - name: month_name
-        data_type: varchar
-        description: ""
+        data_type: VARCHAR(256)
+        description: "El nombre del mes"
 
       - name: month_name_short
-        data_type: varchar
-        description: ""
+        data_type: VARCHAR(256)
+        description: "El nombre corto del mes"
 
       - name: month_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio del mes"
 
       - name: month_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización del mes"
 
       - name: prior_year_month_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio del mes en el año anterior"
 
       - name: prior_year_month_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización del mes en el año anterior"
 
       - name: quarter_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número del trimestre del año"
 
       - name: quarter_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio del trimestre"
 
       - name: quarter_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización del trimestre"
 
-      - name: year_number
-        data_type: number
-        description: ""
+      - name: year_NUMBER(38,0)
+        data_type: NUMBER(38,0)
+        description: "El número del año"
 
       - name: year_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio del año"
 
       - name: year_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización del año"
 
       - name: fiscal_week_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana fiscal del año"
 
       - name: fiscal_week_of_period
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana fiscal del período"
 
-      - name: fiscal_period_number
-        data_type: number
-        description: ""
+      - name: fiscal_period_NUMBER(38,0)
+        data_type: NUMBER(38,0)
+        description: "El número del período fiscal"
 
-      - name: fiscal_quarter_number
-        data_type: number
-        description: ""
+      - name: fiscal_quarter_NUMBER(38,0)
+        data_type: NUMBER(38,0)
+        description: "El número del trimestre fiscal"
 
       - name: fiscal_period_of_quarter
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número del período fiscal dentro del trimestre"
 
   - name: dim__date_fiscal
-    description: ""
+    description: "Tabla que contiene información detallada sobre las fechas fiscales"
+    config:
+      contracts:
+        enabled: true
     columns:
       - name: date_day
         data_type: date
-        description: ""
+        description: "El día de la fecha fiscal"
 
-      - name: fiscal_year_number
-        data_type: number
-        description: ""
+      - name: fiscal_year_NUMBER(38,0)
+        data_type: NUMBER(38,0)
+        description: "El número del año fiscal"
 
       - name: week_start_date
         data_type: date
-        description: ""
+        description: "La fecha de inicio de la semana fiscal"
 
       - name: week_end_date
         data_type: date
-        description: ""
+        description: "La fecha de finalización de la semana fiscal"
 
       - name: fiscal_week_of_year
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana fiscal del año"
 
       - name: fiscal_week_of_period
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número de la semana fiscal del período"
 
-      - name: fiscal_period_number
-        data_type: number
-        description: ""
+      - name: fiscal_period_NUMBER(38,0)
+        data_type: NUMBER(38,0)
+        description: "El número del período fiscal"
 
-      - name: fiscal_quarter_number
-        data_type: number
-        description: ""
+      - name: fiscal_quarter_NUMBER(38,0)
+        data_type: NUMBER(38,0)
+        description: "El número del trimestre fiscal"
 
       - name: fiscal_period_of_quarter
-        data_type: number
-        description: ""
+        data_type: NUMBER(38,0)
+        description: "El número del período fiscal dentro del trimestre"
 
   - name: dim__hour
-    description: ""
+    description: "Tabla que contiene información detallada sobre las horas"
+    config:
+      contracts:
+        enabled: true
     columns:
       - name: date_hour
         data_type: timestamp_ntz
-        description: ""
+        description: "El timestamp de la hora"
 
   - name: dim__week
-    description: ""
+    description: "Tabla que contiene información detallada sobre las semanas"
+    config:
+      contracts:
+        enabled: true
     columns:
       - name: date_week
         data_type: timestamp_ntz
-        description: ""
+        description: "El timestamp de la semana"
 
   - name: dim__addresses
-    description: ""
+    description: "Tabla que contiene las direcciones de los usuarios"
+    config:
+      contracts:
+        enabled: true
     columns:
       - name: address_id
-        data_type: varchar
-        description: ""
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único de la dirección"
 
       - name: zipcode
-        data_type: number
-        description: ""
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: NUMBER(38,0)
+        description: "Código postal de la dirección"
 
       - name: country
-        data_type: varchar
-        description: ""
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "País de la dirección"
 
       - name: address
-        data_type: varchar
-        description: ""
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Dirección completa"
 
       - name: state
-        data_type: varchar
-        description: ""
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Estado o provincia de la dirección"
 
       - name: deleted
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
         data_type: boolean
-        description: ""
+        description: "Indica si la fila ha sido eliminada"
 
       - name: utc_date_load
-        data_type: timestamp_tz
-        description: ""
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se cargó la información"
+
+  - name: dim__event_type
+    description: "Tabla que contiene los tipos de eventos"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: event_type_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único del tipo de evento"
+
+      - name: event_type_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre del tipo de evento"
+
+  - name: dim__order_items
+    description: "Tabla que contiene los artículos incluidos en las órdenes"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__orders')
+              field: order_id
+        data_type: VARCHAR(256)
+        description: "Identificador de la orden a la que pertenecen los artículos"
+
+      - name: product_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__products')
+              field: product_id
+        data_type: VARCHAR(256)
+        description: "Identificador del producto incluido en la orden"
+
+      - name: quantity
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: NUMBER(38,0)
+        description: "Cantidad del producto en la orden"
+
+      - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se cargaron los datos"
+
+  - name: dim__products
+    description: "Tabla que contiene la lista de productos disponibles"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único del producto"
+
+      - name: price
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: float
+        description: "Precio del producto"
+
+      - name: name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre del producto"
+
+      - name: inventory
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: NUMBER(38,0)
+        description: "Cantidad disponible en el inventario"
+
+      - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se cargaron los datos"
+
+  - name: dim__promos
+    description: "Tabla que contiene las promociones disponibles"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: promo_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único de la promoción"
+
+      - name: promo_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre de la promoción"
+
+      - name: discount_dolares
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: NUMBER(38,0)
+        description: "Descuento en dólares ofrecido por la promoción"
+
+      - name: status_promo_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__status_promos')
+              field: status_promo_id
+        data_type: NUMBER(38,0)
+        description: "Identificador del estado de la promoción"
+
+      - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se cargaron los datos"
+
+  - name: dim__shipping_service
+    description: "Tabla que contiene los servicios de envío disponibles"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: shipping_service_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único del servicio de envío"
+
+      - name: shipping_service_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre del servicio de envío"
+
+  - name: dim__status_orders
+    description: "Tabla que contiene los estados de las órdenes"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: status_order_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único del estado de la orden"
+
+      - name: status_order_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre del estado de la orden"
+
+  - name: dim__status_promos
+    description: "Tabla que contiene los estados de las promociones"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: status_promo_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: NUMBER(38,0)
+        description: "Identificador único del estado de la promoción"
+
+      - name: status_promo_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre del estado de la promoción"
+
+  - name: dim__users
+    description: "Tabla que contiene la información de los usuarios"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: user_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único del usuario"
+
+      - name: updated_date
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora de la última actualización del usuario"
+
+      - name: address_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__addresses')
+              field: address_id
+        data_type: VARCHAR(256)
+        description: "Identificador de la dirección del usuario"
+
+      - name: last_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Apellido del usuario"
+
+      - name: created_date
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se creó el usuario"
+
+      - name: phone_NUMBER(38,0)
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - valid_phone_NUMBER(38,0)_or_null
+        data_type: VARCHAR(256)
+        description: "Número de teléfono del usuario"
+
+      - name: total_orders
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: NUMBER(38,0)
+        description: "Total de órdenes realizadas por el usuario"
+
+      - name: first_name
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Nombre del usuario"
+
+      - name: email
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - valid_email
+        data_type: VARCHAR(256)
+        description: "Correo electrónico del usuario"
+
+      - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se cargaron los datos"
+
+  - name: fct__budget
+    description: "Tabla de hechos que contiene los presupuestos"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: _row
+        data_type: NUMBER(38,0)
+        description: "Número de fila del presupuesto"
+
+      - name: product_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__products')
+              field: product_id
+        data_type: VARCHAR(256)
+        description: "Identificador del producto"
+
+      - name: month
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: date
+        description: "Mes del presupuesto"
+
+      - name: quantity
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: NUMBER(38,0)
+        description: "Cantidad presupuestada"
+
+      - name: _fivetran_synced
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora de la sincronización de Fivetran"
+
+  - name: fct__pedidos
+    description: "Tabla de hechos que contiene los pedidos realizados por los usuarios"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - unique
+        data_type: VARCHAR(256)
+        description: "Identificador único del pedido"
+
+      - name: product_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__products')
+              field: product_id
+        data_type: VARCHAR(256)
+        description: "Identificador del producto del pedido"
+
+      - name: quantity
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: NUMBER(38,0)
+        description: "Cantidad del producto en el pedido"
+
+      - name: price
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: float
+        description: "Precio del producto"
+
+      - name: precio_productos
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: float
+        description: "Precio total de los productos"
+
+      - name: shipping_service_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__shipping_service')
+              field: shipping_service_id
+        data_type: VARCHAR(256)
+        description: "Identificador del servicio de envío"
+
+      - name: shipping_cost_product
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: float
+        description: "Costo de envío del producto"
+
+      - name: address_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__addresses')
+              field: address_id
+        data_type: VARCHAR(256)
+        description: "Identificador de la dirección de envío"
+
+      - name: utc_created_date
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se creó el pedido"
+
+      - name: month
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: date
+        description: "Mes en que se realizó el pedido"
+
+      - name: promo_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__promos')
+              field: promo_id
+        data_type: VARCHAR(256)
+        description: "Identificador de la promoción aplicada al pedido"
+
+      - name: discount_dolares_product
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: NUMBER(38,0)
+        description: "Descuento en dólares aplicado al producto"
+
+      - name: utc_estimated_delivery_date
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora estimada de entrega"
+
+      - name: order_cost
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: float
+        description: "Costo total del pedido"
+
+      - name: user_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__users')
+              field: user_id
+        data_type: VARCHAR(256)
+        description: "Identificador del usuario que realizó el pedido"
+
+      - name: precio_producto_total
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: float
+        description: "Precio total del producto en el pedido"
+
+      - name: order_total
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - positive_values
+        data_type: float
+        description: "Costo total del pedido incluyendo el envío"
+
+      - name: utc_delivered_date
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se entregó el pedido"
+
+      - name: tracking_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador para rastrear el pedido"
+
+      - name: status_order_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__status_orders')
+              field: status_order_id
+        data_type: VARCHAR(256)
+        description: "Estado del pedido"
+
+      - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)(9)
+        description: "Fecha y hora en que se cargaron los datos"
+
+  - name: fct_events
+    description: "Tabla de hechos que contiene los eventos de los usuarios"
+    config:
+      contracts:
+        enabled: true
+    columns:
+      - name: event_id
+        tests:
+          - unique
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador único del evento"
+
+      - name: page_url
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "URL de la página donde ocurrió el evento"
+
+      - name: event_type_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__event_type')
+              field: event_type_id
+        data_type: VARCHAR(256)
+        description: "Identificador del tipo de evento"
+
+      - name: user_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__users')
+              field: user_id
+        data_type: VARCHAR(256)
+        description: "Identificador del usuario que realizó el evento"
+
+      - name: product_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__products')
+              field: product_id
+        data_type: VARCHAR(256)
+        description: "Identificador del producto relacionado con el evento"
+
+      - name: session_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: VARCHAR(256)
+        description: "Identificador de la sesión del usuario"
+
+      - name: created_date
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se creó el evento"
+
+      - name: order_id
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+          - relationships:
+              to: ref('dim__orders')
+              field: order_id
+        data_type: VARCHAR(256)
+        description: "Identificador de la orden si está relacionada con el evento"
+
+      - name: deleted
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: boolean
+        description: "Indica si la fila ha sido eliminada"
+
+      - name: utc_date_load
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+        data_type: TIMESTAMP_TZ(9)
+        description: "Fecha y hora en que se cargaron los datos"
