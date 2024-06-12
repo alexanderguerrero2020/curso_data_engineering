@@ -57,5 +57,3 @@ models:
     intermediate:
       +materialized: view
       +database: "ALUMNO9_DEV_SILVER_DB"
-      core:
-      +schema: dbt
